@@ -19,8 +19,10 @@ RUN useradd -d /srv/mapproxy mapproxy && \
     a2enmod rewrite && \
     a2disconf other-vhosts-access-log.conf && \
     mkdir -p /srv/mapproxy/www/htdocs /srv/mapproxy/cache_data /srv/mapproxy/log /srv/mapserver/data && \
-    chown -R mapproxy /srv/mapproxy /srv/mapserver
+    chown -R mapproxy /srv/mapproxy /srv/mapserver 
 
+RUN a2enmod cgid
+RUN apt-get install -y  vim curl
 ADD src/apache/apache.conf /etc/apache2/sites-available/000-default.conf
 
 ADD src/web/proj4leaflet.js /srv/mapproxy/www/htdocs/proj4leaflet.js
@@ -30,9 +32,9 @@ ADD src/mapproxy/seed.sh /srv/mapproxy/seed.sh
 ADD src/mapproxy/seed.yaml /srv/mapproxy/seed.yaml
 ADD src/mapproxy/log.ini /srv/mapproxy/log.ini
 ADD src/mapproxy/application.py /srv/mapproxy/www/application.py
-ADD src/mapproxy/mapproxy.yaml /srv/mapproxy/mapproxy.yaml
 ADD src/mapserver/maastokartta.map /srv/mapserver/maastokartta.map
-
+ADD src/mapserver/taustakartta.map /srv/mapserver/taustakartta.map
+ADD src/mapproxy/mapproxy.yaml /srv/mapproxy/mapproxy.yaml
 EXPOSE 80
 
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]

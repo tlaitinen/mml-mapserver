@@ -5,6 +5,14 @@ seeds:
     grids: [EPSG_3067]
     levels:
       to: 10
+  tausta:
+    caches: [mml_taustakartta_cache]
+    coverages: [finland]
+    grids: [EPSG_3067]
+    levels:
+      to: 10
+
+
 
 coverages:
   finland:

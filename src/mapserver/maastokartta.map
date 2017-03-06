@@ -8,6 +8,9 @@ MAP
   TEMPLATEPATTERN "maastokartta"
   SHAPEPATH "/srv/mapserver/data"
   CONFIG "MS_ERRORFILE" "/tmp/maastokartta.log"
+  CONFIG "CPL_DEBUG" "ON"
+  DEBUG 5
+  CONFIG "PROJ_DEBUG" "ON"
 
   OUTPUTFORMAT
     NAME "png8"
@@ -65,6 +68,8 @@ MAP
     GROUP "maasto"
     STATUS OFF
     TYPE RASTER
+    DEBUG 5
+   
     EXTENT 20000 6594000 740000 7794000
     METADATA
       "wms_title"           "MML Maastokartta 50k"
@@ -89,6 +94,7 @@ MAP
     GROUP "maasto"
     STATUS OFF
     TYPE RASTER
+    DEBUG 5
     EXTENT 20000 6570000 740000 7818000
     METADATA
       "wms_title"           "MML Maastokartta 100k"

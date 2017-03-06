@@ -7,6 +7,10 @@ layers:
   - name: maasto
     title: MML maastokartta
     sources: [mml_maastokartta_cache]
+  - name: tausta
+    title: MML taustakartta
+    sources: [mml_taustakartta_cache]
+
 
 caches:
   mml_maastokartta_cache:
@@ -18,6 +22,17 @@ caches:
     disable_storage: false
     cache:
       type: file
+
+  mml_taustakartta_cache:
+    grids: [EPSG_3067]
+    sources: [mml_taustakartta]
+    format: image/png
+    link_single_color_images: false
+    minimize_meta_requests: true
+    disable_storage: false
+    cache:
+      type: file
+
 
 sources:
   debug_source:
@@ -36,6 +51,22 @@ sources:
     mapserver:
       binary: /usr/lib/cgi-bin/mapserv
       working_dir: /srv/mapserver/
+
+  mml_taustakartta:
+    type: mapserver
+    max_res: 1
+    supported_srs: ['EPSG:3067']
+    coverage:
+        box: [19970, 6597278, 749676, 7785300]
+        srs: 'EPSG:3067'
+    req:
+      layers: taustakartta
+      map: /srv/mapserver/taustakartta.map
+    mapserver:
+      binary: /usr/lib/cgi-bin/mapserv
+      working_dir: /srv/mapserver/
+
+
 
 grids:
   EPSG_3067:
